@@ -1,18 +1,24 @@
 [submodule "UtilLib"]
 	path = UtilLib
 	url = git@github.com:HengineV5/UtilLib.git
+	branch = main
 [submodule "MathLib"]
 	path = MathLib
 	url = git@github.com:HengineV5/MathLib.git
+	branch = main
 [submodule "ImageLib"]
 	path = ImageLib
 	url = git@github.com:HengineV5/ImageLib.git
+	branch = main
 [submodule "EnCS"]
 	path = EnCS
 	url = git@github.com:HengineV5/EnCS.git
+	branch = main
 [submodule "TemplateGenerator"]
 	path = TemplateGenerator
 	url = git@github.com:HengineV5/TemplateGenerator.git
+	branch = main
 [submodule "HengineV5"]
 	path = HengineV5
 	url = git@github.com:HengineV5/HengineV5.git
+	branch = main
