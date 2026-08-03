@@ -1,5 +1,5 @@
 {
-  description = "Hengine development shell (native graphics libraries for Silk.NET/GLFW/Vulkan)";
+  description = "Hengine development shell";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -10,6 +10,8 @@
     devShells = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"] (system: let
       pkgs = nixpkgs.legacyPackages.${system};
 
+      dotnet = pkgs.dotnetCorePackages.sdk_11_0;
+
       runtimeLibs = with pkgs; [
         glfw
         wayland
@@ -17,6 +19,7 @@
         libdecor
         libGL
         vulkan-loader
+        vulkan-validation-layers
         libx11
         libxcursor
         libxrandr
@@ -24,12 +27,27 @@
         libxinerama
         libxxf86vm
         alsa-lib
+        icu
+        openssl
+        zlib
       ];
     in {
       default = pkgs.mkShell {
-        packages = with pkgs; [vulkan-tools];
+        packages = [
+          dotnet
+          pkgs.netcoredbg
+          pkgs.shaderc
+          pkgs.vulkan-tools
+          pkgs.git
+        ];
 
-        LD_LIBRARY_PATH = "${nixpkgs.lib.makeLibraryPath runtimeLibs}:/run/opengl-driver/lib";
+        env = {
+          DOTNET_ROOT = "${dotnet}/share/dotnet";
+          DOTNET_CLI_TELEMETRY_OPTOUT = "1";
+          DOTNET_NOLOGO = "1";
+          VK_LAYER_PATH = "${pkgs.vulkan-validation-layers}/share/vulkan/explicit_layer.d";
+          LD_LIBRARY_PATH = "${nixpkgs.lib.makeLibraryPath runtimeLibs}:/run/opengl-driver/lib";
+        };
       };
     });
   };
