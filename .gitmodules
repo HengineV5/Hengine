@@ -22,3 +22,6 @@
 	path = HengineV5
 	url = git@github.com:HengineV5/HengineV5.git
 	branch = master
+[submodule "RenderLib"]
+	path = RenderLib
+	url = git@github.com:HengineV5/RenderLib.git

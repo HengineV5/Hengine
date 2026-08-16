@@ -37,6 +37,7 @@
           dotnet
           pkgs.netcoredbg
           pkgs.shaderc
+          pkgs.glslang
           pkgs.vulkan-tools
           pkgs.git
         ];
